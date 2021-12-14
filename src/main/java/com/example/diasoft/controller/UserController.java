@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
-
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -33,7 +31,7 @@ public class UserController {
     @GetMapping
     public ResponseEntity getOneUsers(@RequestParam Long id) {
         try {
-            return ResponseEntity.ok(userService.getOne(id));
+            return ResponseEntity.ok(userService.getById(id));
         } catch (UserNotFoundException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
@@ -44,7 +42,7 @@ public class UserController {
     @DeleteMapping("/{id}")
     public ResponseEntity deleteUser(@PathVariable Long id) {
         try {
-            return ResponseEntity.ok(userService.delete(id));
+            return ResponseEntity.ok(userService.deleteById(id));
         }
 //        catch (UserNotFoundException e) {
 //            return ResponseEntity.badRequest().body(e.getMessage());

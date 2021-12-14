@@ -7,7 +7,6 @@ import com.example.diasoft.exception.UserNotFoundException;
 import com.example.diasoft.model.User;
 import com.example.diasoft.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -28,7 +27,7 @@ public class UserService {
         return userRepo.save(user);
     }
 
-    public User getOne(Long id) throws UserNotFoundException {
+    public User getById(Long id) throws UserNotFoundException {
         Optional<UserEntity> user = userRepo.findById(id);
         System.out.println();
         if (!user.isPresent()) {
@@ -37,7 +36,7 @@ public class UserService {
         return User.toModel(user);
     }
 
-    public Long delete(Long id) throws UserNotFoundException {
+    public Long deleteById(Long id) throws UserNotFoundException {
 //        Optional<UserEntity> user = userRepo.findById(id);
 //        if (!user.isPresent()) {
 //            throw new UserNotFoundException("Пользователь с таким id не найден");

@@ -3,6 +3,7 @@ package com.example.diasoft.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -24,4 +25,6 @@ public class UserEntity {
     @Column(name = "pass", nullable = false)
     private String pass;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userid")
+    private List<ToDoEntity> todos;
 }
