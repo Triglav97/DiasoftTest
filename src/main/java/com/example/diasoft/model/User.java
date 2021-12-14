@@ -2,16 +2,23 @@ package com.example.diasoft.model;
 
 import com.example.diasoft.entity.UserEntity;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class User {
     private Long id;
     private String name;
+    private List<Todo> todos;
+
+
+
 
     public static User toModel(Optional<UserEntity> entity){
         User model = new User();
         model.setId(entity.get().getUserId());
         model.setName(entity.get().getName());
+        model.setTodos(entity.get().getTodos().stream().map(Todo::toModel).collect(Collectors.toList()));
         return model;
     }
 
@@ -39,5 +46,13 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Todo> getTodos() {
+        return todos;
+    }
+
+    public void setTodos(List<Todo> todos) {
+        this.todos = todos;
     }
 }

@@ -27,4 +27,6 @@ public class UserEntity {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userid")
     private List<ToDoEntity> todos;
+
+
 }

@@ -2,6 +2,7 @@ package com.example.diasoft.service;
 
 import com.example.diasoft.entity.ToDoEntity;
 import com.example.diasoft.entity.UserEntity;
+import com.example.diasoft.model.Todo;
 import com.example.diasoft.repository.ToDoRepo;
 import com.example.diasoft.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +16,15 @@ public class ToDoService {
     @Autowired
     private UserRepo userRepo;
 
-    public ToDoEntity createToDo(ToDoEntity todo, Long userid){
+    public Todo createToDo(ToDoEntity todo, Long userid){
         UserEntity user = userRepo.findById(userid).get();
         todo.setUserid(user);
-        return todoRepo.save(todo);
+        return Todo.toModel(todoRepo.save(todo));
     }
 
-    public ToDoEntity completeToDo(Long id){
+    public Todo completeToDo(Long id){
         ToDoEntity todo = todoRepo.findById(id).get();
         todo.setCompleted(!todo.getCompleted());
-        return todoRepo.save(todo);
+        return Todo.toModel(todoRepo.save(todo));
     }
 }
